@@ -1,7 +1,7 @@
 class CoffeMachine:
 	water = 25 
 	grains = 25 
-	__curent_trash = 0
+	_curent_trash = 0
 	__max_trash = 40
 
 	def make_cappuccino(self):
@@ -17,7 +17,7 @@ class CoffeMachine:
 		else:
 			self.water -= 7
 			self.grains -= 7
-			self.__curent_trash += 10
+			self._curent_trash += 10
 			print("Капучино готово")
 
 	def make_espresso(self):
@@ -33,7 +33,7 @@ class CoffeMachine:
 		else: 
 			self.water -= 14
 			self.grains -= 12 
-			self.__curent_trash += 10
+			self._curent_trash += 10
 			print("Эспрессо готово")
 
 		
@@ -45,16 +45,52 @@ class CoffeMachine:
 		return self.grains <= 0
 
 	def isfull(self,trash):
-		return self.__curent_trash + trash > self.__max_trash
+		return self._curent_trash + trash > self.__max_trash
 
 	def add(self):
-		self.water = 25 
-		self.grains = 25 
-		self.__curent_trash = 0
+		if self.out_of_water():
+			self.water = 25 
+		elif self.out_of_grains():
+			self.grains = 25 
+		else:
+			self._curent_trash = 0
 
 
 class CoffeMilkMachine(CoffeMachine):
 	milk = 60 
+
+	def make_latte(self):
+		if self.out_of_water():							
+			print("Закончилась вода")
+			self.add()
+		elif self.out_of_grains():
+			print("Закончились зерна")	
+			self.add()
+		elif self.isfull(10):
+			print("Кофеварку нужно почистить")
+			self.add()
+		else:
+			self.water -= 5
+			self.grains -= 6
+			self._curent_trash += 10
+			print("Латте готово")
+
+	def make_cappuccino(self):
+		if self.out_of_water():
+			print("Закончилась вода")
+			self.add()
+		elif self.out_of_grains():
+			print("Закончились зерна")
+			self.add()
+		elif self.isfull(15):
+			print("Кофеварку нужно почистить")
+			self.add()
+		else:
+			self.water -= 8
+			self.grains -= 16
+			self._curent_trash += 15
+			print("Капучино готово")
+
 
 	def add_milk(self):
 		if self.out_of_milk():
@@ -70,7 +106,7 @@ class CoffeMilkMachine(CoffeMachine):
 	def refill_milk(self):
 		self.milk = 60
 
-class CoffeСognacMashine(CoffeMilkMachine):
+class CoffeСognacMachine(CoffeMilkMachine):
 	cognac = 12 
 
 	def add_cognac(self):
@@ -87,10 +123,7 @@ class CoffeСognacMashine(CoffeMilkMachine):
 	def refill_cognac(self):
 		self.cognac = 12
 
-# my = CoffeСognacMashine()
-# my.make_espresso()
-# [my.add_milk() for i in range(10)]
-# [my.add_cognac() for i in range(10)]
-
-
-
+# my = CoffeСognacMachine()
+# [my.make_cappuccino() for i in range(5)]
+# [my.add_milk() for i in range(5)]
+# [my.add_cognac() for i in range(5)]
