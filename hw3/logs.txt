@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "D:\Desktop\Смаковенко Кирилл (ДЗ)\OOP\hw3\app.py", line 25, in <module>
+    main()
+  File "D:\Desktop\Смаковенко Кирилл (ДЗ)\OOP\hw3\app.py", line 21, in main
+    print(cand2.work())  # Вызывает ошибку UnableToWorkException
+  File "D:\Desktop\Смаковенко Кирилл (ДЗ)\OOP\hw3\models.py", line 78, in work
+    raise UnableToWorkException
+models.UnableToWorkException: I’m not hired yet, lol.
