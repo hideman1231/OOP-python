@@ -4,6 +4,7 @@ from models import *
 
 
 def main(): 
+	emp1 = Employee('Sashka Lipin','lipa1@gmail.com',30)
 	prog1 = Programmer('Dima','smakvlad@gmail.com', 300, 2, 2)
 	prog2 = Programmer('Misha','oraora@gmail.com.com', 200, 4)
 	recr1 = Recruiter('Oleg','kakaka@gmail.com',100)
@@ -18,13 +19,22 @@ def main():
 	# print(recr1.check_salary())
 	# print(recr1.work())
 	# print(prog1.__add__(prog2))
-	print(cand2.work())  # Вызывает ошибку UnableToWorkException
+	print(prog1.check_days()) # Статический метод
+	# print(cand2.work())  # Вызывает ошибку UnableToWorkException
+	print(emp1.days_worked) # Вызываем как свойство, потому что @property
+	print(cand1.save_candidate())
+
+
+# if __name__ == '__main__':
+# 	try: 
+# 		main()
+# 	except Exception as err:
+# 		err = traceback.format_exc()
+# 		with open("logs.txt","w") as file:
+# 			file.write(err)
+# 	finally:
+# 		print("Good")
 
 if __name__ == '__main__':
-	try: 
-		main()
-	except Exception as err:
-		err = traceback.format_exc()
-		with open("logs.txt","w") as file:
-			file.write(err)
+	main()
 		

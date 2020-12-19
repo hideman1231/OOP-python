@@ -1,17 +1,19 @@
+import csv
+
+
 from day import day_count
 
-
 class UnableToWorkException(Exception):
-	def __str__(self):
-		return "I’m not hired yet, lol."
+	pass
+
 
 class Employee:
 	def __init__(self,name,email,salary):
 		self.name = name 
 		self.email = email 
 		self.salary = salary 
-		self.check_email()
-		self.save_email()
+		# self.check_email()
+		# self.save_email()
 
 	def work(self):
 		return "I come to the office."
@@ -32,6 +34,14 @@ class Employee:
 			if self.email in file.read():
 				raise ValueError
 
+	@staticmethod
+	def check_days():
+		return day_count
+
+	@property
+	def days_worked(self):
+		return f"{self.__class__.__name__} {self.name} {day_count}"
+	
 
 class Recruiter(Employee):
 	def __init__(self,name,email,salary,hired_this_month=0):
@@ -75,7 +85,20 @@ class Candidate():
 		self.main_skill_grade = main_skill_grade
 
 	def work(self):
-		raise UnableToWorkException
+		raise UnableToWorkException("I’m not hired yet, lol.")
+
+	@classmethod
+	def save_candidate(cls):
+		candidate_list = []
+		with open("candidates.csv", newline="") as csvfile:
+			reader = csv.DictReader(csvfile)
+			for i in reader:
+				candidate_list.append(Candidate(i["Full Name"],
+					i["Email"],
+					i["Technologies"],
+					i["Main Skill"],
+					i["Main Skill Grade"]))
+		return candidate_list
 
 
 class Vacancy():
