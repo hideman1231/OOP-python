@@ -1,5 +1,6 @@
 import csv 
 
+
 class Record:
     def __init__(self, phone_number, address=None):
         self.phone_number = phone_number  # this should be unique
@@ -31,11 +32,11 @@ class Person(Record):
         with open(fp, newline="") as csvfile:
             reader = csv.DictReader(csvfile)
             for i in reader:
-                return cls(i["first_name"], 
-                    i["last_name"],
-                    i["email"],
-                    i["phone_number"],
-                    i["address"])
+                return cls(i["first_name"],
+                           i["last_name"],
+                           i["email"],
+                           i["phone_number"],
+                           i["address"])
 
 
 class Organization(Record):
@@ -45,11 +46,11 @@ class Organization(Record):
         self.category = category
 
     @classmethod
-    def from_csv(cls,fp):
-       with open(fp,newline="") as csvfile:
+    def from_csv(cls, fp):
+        with open(fp, newline="") as csvfile:
             reader = csv.DictReader(csvfile)
             for i in reader:
-                return cls(i["name"],i["category"],i["phone_number"],i["address"])
+                return cls(i["name"], i["category"], i["phone_number"], i["address"])
 
     def __str__(self):
         return f"{self.name} {self.category} {self.phone_number} {self.address}"
@@ -59,8 +60,8 @@ class AddressBook:
     def __init__(self, fp):
         self.fp = fp
 
-    def validate_person(self,data):
-        with open(self.fp,newline="") as csvfile:
+    def validate_person(self, data):
+        with open(self.fp, newline="") as csvfile:
             reader = csv.DictReader(csvfile)
             for i in reader:
                 if data["phone_number"] == int(i["phone_number"]):
@@ -71,7 +72,7 @@ class AddressBook:
                     return "validation was successful"
 
     def validate_org(self, data):
-        with open(self.fp,newline="") as csvfile:
+        with open(self.fp, newline="") as csvfile:
             reader = csv.DictReader(csvfile)
             for i in reader:
                 if data["name"] == i["name"]:
@@ -86,7 +87,7 @@ class AddressBook:
             self.validate_org(data)
         with open(self.fp, "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
-            writer.writerow((type_,*data.values()))
+            writer.writerow((type_, *data.values()))
 
     def find_record(self, type_, search_term):
         with open("address_book.csv", newline="") as csvfile:
@@ -99,7 +100,6 @@ class AddressBook:
                     if search_term.lower() in i.values():
                         print(i)
 
-
     def get_records(self, type_):
         with open("address_book.csv", newline="") as csvfile:
             reader = csv.DictReader(csvfile)
@@ -108,4 +108,3 @@ class AddressBook:
                     print(i)
                 elif type_ == i["type"]:
                     print(i)
-

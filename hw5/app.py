@@ -22,7 +22,8 @@ def main():
             After adding record show success message in console
             """
             type_ = 'Organization'
-            data = {'phone_number': 77777, 'address': '', 'name': 'Volya', 'category': 'razvod' , 'first_name': '', 'last_name': '', 'email': ''}
+            data = {'phone_number': 77777, 'address': '', 'name': 'Volya', 'category': 'razvod', 'first_name': '',
+                    'last_name': '', 'email': ''}
             address_book.add_record(type_, data)
         if command == 'SHOW':
             """
@@ -46,4 +47,7 @@ def main():
 
 if __name__ == '__main__':
     # Add try/except block to log every unhandled exception. (same as for lesson 4)
-    main()
+    try:
+    	main()
+    except Exception as err:
+    	print(err)
