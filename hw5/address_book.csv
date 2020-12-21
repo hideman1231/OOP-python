@@ -1,0 +1,3 @@
+type,phone,address,name,category,first_name,last_name, email
+Person,123456,qweqwe,,,ivan,ivanov,ii@mail.com
+Organization,77777,,Volya,razvod,,,
